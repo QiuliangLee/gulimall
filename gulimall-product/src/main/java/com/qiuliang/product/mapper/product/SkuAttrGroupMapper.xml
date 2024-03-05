@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiuliang.product.mapper.product.SkuAttrGroupMapper">
+  <resultMap id="BaseResultMap" type="com.qiuliang.product.model.pojo.product.SkuAttrGroupPo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="attr_group_id" jdbcType="BIGINT" property="attrGroupId" />
+    <result column="attr_group_name" jdbcType="VARCHAR" property="attrGroupName" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="descript" jdbcType="VARCHAR" property="descript" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="catelog_id" jdbcType="BIGINT" property="catelogId" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+  </resultMap>
+  <resultMap id="AliasBaseResultMap" type="com.qiuliang.product.model.pojo.product.SkuAttrGroupPo">
+    <id column="sku_attr_group_id" jdbcType="BIGINT" property="id" />
+    <result column="sku_attr_group_attr_group_id" jdbcType="BIGINT" property="attrGroupId" />
+    <result column="sku_attr_group_attr_group_name" jdbcType="VARCHAR" property="attrGroupName" />
+    <result column="sku_attr_group_sort" jdbcType="INTEGER" property="sort" />
+    <result column="sku_attr_group_descript" jdbcType="VARCHAR" property="descript" />
+    <result column="sku_attr_group_icon" jdbcType="VARCHAR" property="icon" />
+    <result column="sku_attr_group_catelog_id" jdbcType="BIGINT" property="catelogId" />
+    <result column="sku_attr_group_is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="sku_attr_group_ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="sku_attr_group_mtime" jdbcType="TIMESTAMP" property="mtime" />
+  </resultMap>
+  <sql id="Alias_Base_Column_List">
+    ${alias}.id as sku_attr_group_id, ${alias}.attr_group_id as sku_attr_group_attr_group_id, 
+    ${alias}.attr_group_name as sku_attr_group_attr_group_name, ${alias}.sort as sku_attr_group_sort, 
+    ${alias}.descript as sku_attr_group_descript, ${alias}.icon as sku_attr_group_icon, 
+    ${alias}.catelog_id as sku_attr_group_catelog_id, ${alias}.is_deleted as sku_attr_group_is_deleted, 
+    ${alias}.ctime as sku_attr_group_ctime, ${alias}.mtime as sku_attr_group_mtime
+  </sql>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, attr_group_id, attr_group_name, sort, descript, icon, catelog_id, is_deleted, 
+    ctime, mtime
+  </sql>
+  <select id="selectByExample" parameterType="com.qiuliang.product.model.pojo.product.SkuAttrGroupPoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sku_attr_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sku_attr_group
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from sku_attr_group
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiuliang.product.model.pojo.product.SkuAttrGroupPoExample">
+    delete from sku_attr_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiuliang.product.model.pojo.product.SkuAttrGroupPo">
+    insert into sku_attr_group (id, attr_group_id, attr_group_name, 
+      sort, descript, icon, 
+      catelog_id, is_deleted, ctime, 
+      mtime)
+    values (#{id,jdbcType=BIGINT}, #{attrGroupId,jdbcType=BIGINT}, #{attrGroupName,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{descript,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{catelogId,jdbcType=BIGINT}, #{isDeleted,jdbcType=TINYINT}, #{ctime,jdbcType=TIMESTAMP}, 
+      #{mtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiuliang.product.model.pojo.product.SkuAttrGroupPo">
+    insert into sku_attr_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="attrGroupId != null">
+        attr_group_id,
+      </if>
+      <if test="attrGroupName != null">
+        attr_group_name,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="descript != null">
+        descript,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="catelogId != null">
+        catelog_id,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="attrGroupId != null">
+        #{attrGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="attrGroupName != null">
+        #{attrGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="descript != null">
+        #{descript,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="catelogId != null">
+        #{catelogId,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiuliang.product.model.pojo.product.SkuAttrGroupPoExample" resultType="java.lang.Long">
+    select count(*) from sku_attr_group
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update sku_attr_group
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.attrGroupId != null">
+        attr_group_id = #{record.attrGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="record.attrGroupName != null">
+        attr_group_name = #{record.attrGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.descript != null">
+        descript = #{record.descript,jdbcType=VARCHAR},
+      </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.catelogId != null">
+        catelog_id = #{record.catelogId,jdbcType=BIGINT},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mtime != null">
+        mtime = #{record.mtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update sku_attr_group
+    set id = #{record.id,jdbcType=BIGINT},
+      attr_group_id = #{record.attrGroupId,jdbcType=BIGINT},
+      attr_group_name = #{record.attrGroupName,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      descript = #{record.descript,jdbcType=VARCHAR},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      catelog_id = #{record.catelogId,jdbcType=BIGINT},
+      is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      mtime = #{record.mtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiuliang.product.model.pojo.product.SkuAttrGroupPo">
+    update sku_attr_group
+    <set>
+      <if test="attrGroupId != null">
+        attr_group_id = #{attrGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="attrGroupName != null">
+        attr_group_name = #{attrGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="descript != null">
+        descript = #{descript,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="catelogId != null">
+        catelog_id = #{catelogId,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiuliang.product.model.pojo.product.SkuAttrGroupPo">
+    update sku_attr_group
+    set attr_group_id = #{attrGroupId,jdbcType=BIGINT},
+      attr_group_name = #{attrGroupName,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      descript = #{descript,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      catelog_id = #{catelogId,jdbcType=BIGINT},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="insertUpdate" parameterType="com.qiuliang.product.model.pojo.product.SkuAttrGroupPo">
+    insert into sku_attr_group (id, attr_group_id, attr_group_name, 
+      sort, descript, icon, 
+      catelog_id, is_deleted, ctime, 
+      mtime)
+    values (#{id,jdbcType=BIGINT}, #{attrGroupId,jdbcType=BIGINT}, #{attrGroupName,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{descript,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{catelogId,jdbcType=BIGINT}, #{isDeleted,jdbcType=TINYINT}, #{ctime,jdbcType=TIMESTAMP}, 
+      #{mtime,jdbcType=TIMESTAMP})
+    <trim prefix="on duplicate key update" suffixOverrides=",">
+      attr_group_id = values(attr_group_id),
+      attr_group_name = values(attr_group_name),
+      sort = values(sort),
+      descript = values(descript),
+      icon = values(icon),
+      catelog_id = values(catelog_id),
+      is_deleted = values(is_deleted),
+      ctime = values(ctime),
+      mtime = values(mtime),
+    </trim>
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into 
+      sku_attr_group
+      (attr_group_id,attr_group_name,sort,descript,icon,catelog_id,is_deleted,ctime,mtime)
+    values
+    <foreach collection="list" item="item" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        #{item.attrGroupId,jdbcType=BIGINT},
+        #{item.attrGroupName,jdbcType=VARCHAR},
+        #{item.sort,jdbcType=INTEGER},
+        #{item.descript,jdbcType=VARCHAR},
+        #{item.icon,jdbcType=VARCHAR},
+        #{item.catelogId,jdbcType=BIGINT},
+        #{item.isDeleted,jdbcType=TINYINT},
+        #{item.ctime,jdbcType=TIMESTAMP},
+        #{item.mtime,jdbcType=TIMESTAMP},
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="insertUpdateBatch" parameterType="java.util.List">
+    insert into 
+      sku_attr_group
+      (attr_group_id,attr_group_name,sort,descript,icon,catelog_id,is_deleted,ctime,mtime)
+    values
+    <foreach collection="list" item="item" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        #{item.attrGroupId,jdbcType=BIGINT},
+        #{item.attrGroupName,jdbcType=VARCHAR},
+        #{item.sort,jdbcType=INTEGER},
+        #{item.descript,jdbcType=VARCHAR},
+        #{item.icon,jdbcType=VARCHAR},
+        #{item.catelogId,jdbcType=BIGINT},
+        #{item.isDeleted,jdbcType=TINYINT},
+        #{item.ctime,jdbcType=TIMESTAMP},
+        #{item.mtime,jdbcType=TIMESTAMP},
+      </trim>
+    </foreach>
+    <trim prefix="on duplicate key update" suffixOverrides=",">
+      attr_group_id = values(attr_group_id),
+      attr_group_name = values(attr_group_name),
+      sort = values(sort),
+      descript = values(descript),
+      icon = values(icon),
+      catelog_id = values(catelog_id),
+      is_deleted = values(is_deleted),
+      ctime = values(ctime),
+      mtime = values(mtime),
+    </trim>
+  </insert>
+  <insert id="insertUpdateSelective" parameterType="com.qiuliang.product.model.pojo.product.SkuAttrGroupPo">
+    insert into sku_attr_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="attrGroupId != null">
+        attr_group_id,
+      </if>
+      <if test="attrGroupName != null">
+        attr_group_name,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="descript != null">
+        descript,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="catelogId != null">
+        catelog_id,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="attrGroupId != null">
+        #{attrGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="attrGroupName != null">
+        #{attrGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="descript != null">
+        #{descript,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="catelogId != null">
+        #{catelogId,jdbcType=BIGINT},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    <trim prefix="on duplicate key update" suffixOverrides=",">
+      <if test="attrGroupId != null">
+        attr_group_id = values(attr_group_id),
+      </if>
+      <if test="attrGroupName != null">
+        attr_group_name = values(attr_group_name),
+      </if>
+      <if test="sort != null">
+        sort = values(sort),
+      </if>
+      <if test="descript != null">
+        descript = values(descript),
+      </if>
+      <if test="icon != null">
+        icon = values(icon),
+      </if>
+      <if test="catelogId != null">
+        catelog_id = values(catelog_id),
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = values(is_deleted),
+      </if>
+      <if test="ctime != null">
+        ctime = values(ctime),
+      </if>
+      <if test="mtime != null">
+        mtime = values(mtime),
+      </if>
+    </trim>
+  </insert>
+</mapper>

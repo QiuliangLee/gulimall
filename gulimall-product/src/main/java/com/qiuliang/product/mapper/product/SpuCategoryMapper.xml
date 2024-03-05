@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiuliang.product.mapper.product.SpuCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.qiuliang.product.model.pojo.product.SpuCategoryPo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="show_status" jdbcType="TINYINT" property="showStatus" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="parent_cid" jdbcType="BIGINT" property="parentCid" />
+    <result column="cat_level" jdbcType="INTEGER" property="catLevel" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="product_unit" jdbcType="VARCHAR" property="productUnit" />
+    <result column="product_count" jdbcType="INTEGER" property="productCount" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+  </resultMap>
+  <resultMap id="AliasBaseResultMap" type="com.qiuliang.product.model.pojo.product.SpuCategoryPo">
+    <id column="spu_category_id" jdbcType="BIGINT" property="id" />
+    <result column="spu_category_category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="spu_category_show_status" jdbcType="TINYINT" property="showStatus" />
+    <result column="spu_category_name" jdbcType="VARCHAR" property="name" />
+    <result column="spu_category_parent_cid" jdbcType="BIGINT" property="parentCid" />
+    <result column="spu_category_cat_level" jdbcType="INTEGER" property="catLevel" />
+    <result column="spu_category_sort" jdbcType="INTEGER" property="sort" />
+    <result column="spu_category_icon" jdbcType="VARCHAR" property="icon" />
+    <result column="spu_category_product_unit" jdbcType="VARCHAR" property="productUnit" />
+    <result column="spu_category_product_count" jdbcType="INTEGER" property="productCount" />
+    <result column="spu_category_is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="spu_category_ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="spu_category_mtime" jdbcType="TIMESTAMP" property="mtime" />
+  </resultMap>
+  <sql id="Alias_Base_Column_List">
+    ${alias}.id as spu_category_id, ${alias}.category_id as spu_category_category_id, 
+    ${alias}.show_status as spu_category_show_status, ${alias}.name as spu_category_name, 
+    ${alias}.parent_cid as spu_category_parent_cid, ${alias}.cat_level as spu_category_cat_level, 
+    ${alias}.sort as spu_category_sort, ${alias}.icon as spu_category_icon, ${alias}.product_unit as spu_category_product_unit, 
+    ${alias}.product_count as spu_category_product_count, ${alias}.is_deleted as spu_category_is_deleted, 
+    ${alias}.ctime as spu_category_ctime, ${alias}.mtime as spu_category_mtime
+  </sql>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, category_id, show_status, name, parent_cid, cat_level, sort, icon, product_unit, 
+    product_count, is_deleted, ctime, mtime
+  </sql>
+  <select id="selectByExample" parameterType="com.qiuliang.product.model.pojo.product.SpuCategoryPoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from spu_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from spu_category
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from spu_category
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiuliang.product.model.pojo.product.SpuCategoryPoExample">
+    delete from spu_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiuliang.product.model.pojo.product.SpuCategoryPo">
+    insert into spu_category (id, category_id, show_status, 
+      name, parent_cid, cat_level, 
+      sort, icon, product_unit, 
+      product_count, is_deleted, ctime, 
+      mtime)
+    values (#{id,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, #{showStatus,jdbcType=TINYINT}, 
+      #{name,jdbcType=VARCHAR}, #{parentCid,jdbcType=BIGINT}, #{catLevel,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, #{productUnit,jdbcType=VARCHAR}, 
+      #{productCount,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, #{ctime,jdbcType=TIMESTAMP}, 
+      #{mtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiuliang.product.model.pojo.product.SpuCategoryPo">
+    insert into spu_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="showStatus != null">
+        show_status,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="parentCid != null">
+        parent_cid,
+      </if>
+      <if test="catLevel != null">
+        cat_level,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="productUnit != null">
+        product_unit,
+      </if>
+      <if test="productCount != null">
+        product_count,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="showStatus != null">
+        #{showStatus,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCid != null">
+        #{parentCid,jdbcType=BIGINT},
+      </if>
+      <if test="catLevel != null">
+        #{catLevel,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="productUnit != null">
+        #{productUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="productCount != null">
+        #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiuliang.product.model.pojo.product.SpuCategoryPoExample" resultType="java.lang.Long">
+    select count(*) from spu_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update spu_category
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="record.showStatus != null">
+        show_status = #{record.showStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentCid != null">
+        parent_cid = #{record.parentCid,jdbcType=BIGINT},
+      </if>
+      <if test="record.catLevel != null">
+        cat_level = #{record.catLevel,jdbcType=INTEGER},
+      </if>
+      <if test="record.sort != null">
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productUnit != null">
+        product_unit = #{record.productUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.productCount != null">
+        product_count = #{record.productCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mtime != null">
+        mtime = #{record.mtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update spu_category
+    set id = #{record.id,jdbcType=BIGINT},
+      category_id = #{record.categoryId,jdbcType=BIGINT},
+      show_status = #{record.showStatus,jdbcType=TINYINT},
+      name = #{record.name,jdbcType=VARCHAR},
+      parent_cid = #{record.parentCid,jdbcType=BIGINT},
+      cat_level = #{record.catLevel,jdbcType=INTEGER},
+      sort = #{record.sort,jdbcType=INTEGER},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      product_unit = #{record.productUnit,jdbcType=VARCHAR},
+      product_count = #{record.productCount,jdbcType=INTEGER},
+      is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      mtime = #{record.mtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiuliang.product.model.pojo.product.SpuCategoryPo">
+    update spu_category
+    <set>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="showStatus != null">
+        show_status = #{showStatus,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCid != null">
+        parent_cid = #{parentCid,jdbcType=BIGINT},
+      </if>
+      <if test="catLevel != null">
+        cat_level = #{catLevel,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="productUnit != null">
+        product_unit = #{productUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="productCount != null">
+        product_count = #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiuliang.product.model.pojo.product.SpuCategoryPo">
+    update spu_category
+    set category_id = #{categoryId,jdbcType=BIGINT},
+      show_status = #{showStatus,jdbcType=TINYINT},
+      name = #{name,jdbcType=VARCHAR},
+      parent_cid = #{parentCid,jdbcType=BIGINT},
+      cat_level = #{catLevel,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      product_unit = #{productUnit,jdbcType=VARCHAR},
+      product_count = #{productCount,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="insertUpdate" parameterType="com.qiuliang.product.model.pojo.product.SpuCategoryPo">
+    insert into spu_category (id, category_id, show_status, 
+      name, parent_cid, cat_level, 
+      sort, icon, product_unit, 
+      product_count, is_deleted, ctime, 
+      mtime)
+    values (#{id,jdbcType=BIGINT}, #{categoryId,jdbcType=BIGINT}, #{showStatus,jdbcType=TINYINT}, 
+      #{name,jdbcType=VARCHAR}, #{parentCid,jdbcType=BIGINT}, #{catLevel,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, #{productUnit,jdbcType=VARCHAR}, 
+      #{productCount,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, #{ctime,jdbcType=TIMESTAMP}, 
+      #{mtime,jdbcType=TIMESTAMP})
+    <trim prefix="on duplicate key update" suffixOverrides=",">
+      category_id = values(category_id),
+      show_status = values(show_status),
+      name = values(name),
+      parent_cid = values(parent_cid),
+      cat_level = values(cat_level),
+      sort = values(sort),
+      icon = values(icon),
+      product_unit = values(product_unit),
+      product_count = values(product_count),
+      is_deleted = values(is_deleted),
+      ctime = values(ctime),
+      mtime = values(mtime),
+    </trim>
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into 
+      spu_category
+      (category_id,show_status,name,parent_cid,cat_level,sort,icon,product_unit,product_count,is_deleted,ctime,mtime)
+    values
+    <foreach collection="list" item="item" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        #{item.categoryId,jdbcType=BIGINT},
+        #{item.showStatus,jdbcType=TINYINT},
+        #{item.name,jdbcType=VARCHAR},
+        #{item.parentCid,jdbcType=BIGINT},
+        #{item.catLevel,jdbcType=INTEGER},
+        #{item.sort,jdbcType=INTEGER},
+        #{item.icon,jdbcType=VARCHAR},
+        #{item.productUnit,jdbcType=VARCHAR},
+        #{item.productCount,jdbcType=INTEGER},
+        #{item.isDeleted,jdbcType=TINYINT},
+        #{item.ctime,jdbcType=TIMESTAMP},
+        #{item.mtime,jdbcType=TIMESTAMP},
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="insertUpdateBatch" parameterType="java.util.List">
+    insert into 
+      spu_category
+      (category_id,show_status,name,parent_cid,cat_level,sort,icon,product_unit,product_count,is_deleted,ctime,mtime)
+    values
+    <foreach collection="list" item="item" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        #{item.categoryId,jdbcType=BIGINT},
+        #{item.showStatus,jdbcType=TINYINT},
+        #{item.name,jdbcType=VARCHAR},
+        #{item.parentCid,jdbcType=BIGINT},
+        #{item.catLevel,jdbcType=INTEGER},
+        #{item.sort,jdbcType=INTEGER},
+        #{item.icon,jdbcType=VARCHAR},
+        #{item.productUnit,jdbcType=VARCHAR},
+        #{item.productCount,jdbcType=INTEGER},
+        #{item.isDeleted,jdbcType=TINYINT},
+        #{item.ctime,jdbcType=TIMESTAMP},
+        #{item.mtime,jdbcType=TIMESTAMP},
+      </trim>
+    </foreach>
+    <trim prefix="on duplicate key update" suffixOverrides=",">
+      category_id = values(category_id),
+      show_status = values(show_status),
+      name = values(name),
+      parent_cid = values(parent_cid),
+      cat_level = values(cat_level),
+      sort = values(sort),
+      icon = values(icon),
+      product_unit = values(product_unit),
+      product_count = values(product_count),
+      is_deleted = values(is_deleted),
+      ctime = values(ctime),
+      mtime = values(mtime),
+    </trim>
+  </insert>
+  <insert id="insertUpdateSelective" parameterType="com.qiuliang.product.model.pojo.product.SpuCategoryPo">
+    insert into spu_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="showStatus != null">
+        show_status,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="parentCid != null">
+        parent_cid,
+      </if>
+      <if test="catLevel != null">
+        cat_level,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="productUnit != null">
+        product_unit,
+      </if>
+      <if test="productCount != null">
+        product_count,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="showStatus != null">
+        #{showStatus,jdbcType=TINYINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCid != null">
+        #{parentCid,jdbcType=BIGINT},
+      </if>
+      <if test="catLevel != null">
+        #{catLevel,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="productUnit != null">
+        #{productUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="productCount != null">
+        #{productCount,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    <trim prefix="on duplicate key update" suffixOverrides=",">
+      <if test="categoryId != null">
+        category_id = values(category_id),
+      </if>
+      <if test="showStatus != null">
+        show_status = values(show_status),
+      </if>
+      <if test="name != null">
+        name = values(name),
+      </if>
+      <if test="parentCid != null">
+        parent_cid = values(parent_cid),
+      </if>
+      <if test="catLevel != null">
+        cat_level = values(cat_level),
+      </if>
+      <if test="sort != null">
+        sort = values(sort),
+      </if>
+      <if test="icon != null">
+        icon = values(icon),
+      </if>
+      <if test="productUnit != null">
+        product_unit = values(product_unit),
+      </if>
+      <if test="productCount != null">
+        product_count = values(product_count),
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = values(is_deleted),
+      </if>
+      <if test="ctime != null">
+        ctime = values(ctime),
+      </if>
+      <if test="mtime != null">
+        mtime = values(mtime),
+      </if>
+    </trim>
+  </insert>
+</mapper>

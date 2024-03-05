@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiuliang.product.mapper.product.PurchaseLogMapper">
+  <resultMap id="BaseResultMap" type="com.qiuliang.product.model.pojo.product.PurchaseLogPo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="purchase_id" jdbcType="BIGINT" property="purchaseId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="spu_id" jdbcType="BIGINT" property="spuId" />
+    <result column="spu_name" jdbcType="VARCHAR" property="spuName" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+  </resultMap>
+  <resultMap id="AliasBaseResultMap" type="com.qiuliang.product.model.pojo.product.PurchaseLogPo">
+    <id column="purchase_log_id" jdbcType="BIGINT" property="id" />
+    <result column="purchase_log_purchase_id" jdbcType="BIGINT" property="purchaseId" />
+    <result column="purchase_log_user_id" jdbcType="BIGINT" property="userId" />
+    <result column="purchase_log_user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="purchase_log_sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="purchase_log_sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="purchase_log_spu_id" jdbcType="BIGINT" property="spuId" />
+    <result column="purchase_log_spu_name" jdbcType="VARCHAR" property="spuName" />
+    <result column="purchase_log_is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="purchase_log_ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="purchase_log_mtime" jdbcType="TIMESTAMP" property="mtime" />
+  </resultMap>
+  <sql id="Alias_Base_Column_List">
+    ${alias}.id as purchase_log_id, ${alias}.purchase_id as purchase_log_purchase_id, 
+    ${alias}.user_id as purchase_log_user_id, ${alias}.user_name as purchase_log_user_name, 
+    ${alias}.sku_id as purchase_log_sku_id, ${alias}.sku_name as purchase_log_sku_name, 
+    ${alias}.spu_id as purchase_log_spu_id, ${alias}.spu_name as purchase_log_spu_name, 
+    ${alias}.is_deleted as purchase_log_is_deleted, ${alias}.ctime as purchase_log_ctime, 
+    ${alias}.mtime as purchase_log_mtime
+  </sql>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, purchase_id, user_id, user_name, sku_id, sku_name, spu_id, spu_name, is_deleted, 
+    ctime, mtime
+  </sql>
+  <select id="selectByExample" parameterType="com.qiuliang.product.model.pojo.product.PurchaseLogPoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from purchase_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from purchase_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from purchase_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiuliang.product.model.pojo.product.PurchaseLogPoExample">
+    delete from purchase_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiuliang.product.model.pojo.product.PurchaseLogPo">
+    insert into purchase_log (id, purchase_id, user_id, 
+      user_name, sku_id, sku_name, 
+      spu_id, spu_name, is_deleted, 
+      ctime, mtime)
+    values (#{id,jdbcType=BIGINT}, #{purchaseId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{userName,jdbcType=VARCHAR}, #{skuId,jdbcType=BIGINT}, #{skuName,jdbcType=VARCHAR}, 
+      #{spuId,jdbcType=BIGINT}, #{spuName,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiuliang.product.model.pojo.product.PurchaseLogPo">
+    insert into purchase_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="purchaseId != null">
+        purchase_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="skuName != null">
+        sku_name,
+      </if>
+      <if test="spuId != null">
+        spu_id,
+      </if>
+      <if test="spuName != null">
+        spu_name,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseId != null">
+        #{purchaseId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="skuName != null">
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="spuId != null">
+        #{spuId,jdbcType=BIGINT},
+      </if>
+      <if test="spuName != null">
+        #{spuName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiuliang.product.model.pojo.product.PurchaseLogPoExample" resultType="java.lang.Long">
+    select count(*) from purchase_log
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update purchase_log
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.purchaseId != null">
+        purchase_id = #{record.purchaseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.userName != null">
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuId != null">
+        sku_id = #{record.skuId,jdbcType=BIGINT},
+      </if>
+      <if test="record.skuName != null">
+        sku_name = #{record.skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.spuId != null">
+        spu_id = #{record.spuId,jdbcType=BIGINT},
+      </if>
+      <if test="record.spuName != null">
+        spu_name = #{record.spuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mtime != null">
+        mtime = #{record.mtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update purchase_log
+    set id = #{record.id,jdbcType=BIGINT},
+      purchase_id = #{record.purchaseId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      sku_id = #{record.skuId,jdbcType=BIGINT},
+      sku_name = #{record.skuName,jdbcType=VARCHAR},
+      spu_id = #{record.spuId,jdbcType=BIGINT},
+      spu_name = #{record.spuName,jdbcType=VARCHAR},
+      is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      mtime = #{record.mtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiuliang.product.model.pojo.product.PurchaseLogPo">
+    update purchase_log
+    <set>
+      <if test="purchaseId != null">
+        purchase_id = #{purchaseId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="skuName != null">
+        sku_name = #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="spuId != null">
+        spu_id = #{spuId,jdbcType=BIGINT},
+      </if>
+      <if test="spuName != null">
+        spu_name = #{spuName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiuliang.product.model.pojo.product.PurchaseLogPo">
+    update purchase_log
+    set purchase_id = #{purchaseId,jdbcType=BIGINT},
+      user_id = #{userId,jdbcType=BIGINT},
+      user_name = #{userName,jdbcType=VARCHAR},
+      sku_id = #{skuId,jdbcType=BIGINT},
+      sku_name = #{skuName,jdbcType=VARCHAR},
+      spu_id = #{spuId,jdbcType=BIGINT},
+      spu_name = #{spuName,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="insertUpdate" parameterType="com.qiuliang.product.model.pojo.product.PurchaseLogPo">
+    insert into purchase_log (id, purchase_id, user_id, 
+      user_name, sku_id, sku_name, 
+      spu_id, spu_name, is_deleted, 
+      ctime, mtime)
+    values (#{id,jdbcType=BIGINT}, #{purchaseId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
+      #{userName,jdbcType=VARCHAR}, #{skuId,jdbcType=BIGINT}, #{skuName,jdbcType=VARCHAR}, 
+      #{spuId,jdbcType=BIGINT}, #{spuName,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP})
+    <trim prefix="on duplicate key update" suffixOverrides=",">
+      purchase_id = values(purchase_id),
+      user_id = values(user_id),
+      user_name = values(user_name),
+      sku_id = values(sku_id),
+      sku_name = values(sku_name),
+      spu_id = values(spu_id),
+      spu_name = values(spu_name),
+      is_deleted = values(is_deleted),
+      ctime = values(ctime),
+      mtime = values(mtime),
+    </trim>
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into 
+      purchase_log
+      (purchase_id,user_id,user_name,sku_id,sku_name,spu_id,spu_name,is_deleted,ctime,mtime)
+    values
+    <foreach collection="list" item="item" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        #{item.purchaseId,jdbcType=BIGINT},
+        #{item.userId,jdbcType=BIGINT},
+        #{item.userName,jdbcType=VARCHAR},
+        #{item.skuId,jdbcType=BIGINT},
+        #{item.skuName,jdbcType=VARCHAR},
+        #{item.spuId,jdbcType=BIGINT},
+        #{item.spuName,jdbcType=VARCHAR},
+        #{item.isDeleted,jdbcType=TINYINT},
+        #{item.ctime,jdbcType=TIMESTAMP},
+        #{item.mtime,jdbcType=TIMESTAMP},
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="insertUpdateBatch" parameterType="java.util.List">
+    insert into 
+      purchase_log
+      (purchase_id,user_id,user_name,sku_id,sku_name,spu_id,spu_name,is_deleted,ctime,mtime)
+    values
+    <foreach collection="list" item="item" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        #{item.purchaseId,jdbcType=BIGINT},
+        #{item.userId,jdbcType=BIGINT},
+        #{item.userName,jdbcType=VARCHAR},
+        #{item.skuId,jdbcType=BIGINT},
+        #{item.skuName,jdbcType=VARCHAR},
+        #{item.spuId,jdbcType=BIGINT},
+        #{item.spuName,jdbcType=VARCHAR},
+        #{item.isDeleted,jdbcType=TINYINT},
+        #{item.ctime,jdbcType=TIMESTAMP},
+        #{item.mtime,jdbcType=TIMESTAMP},
+      </trim>
+    </foreach>
+    <trim prefix="on duplicate key update" suffixOverrides=",">
+      purchase_id = values(purchase_id),
+      user_id = values(user_id),
+      user_name = values(user_name),
+      sku_id = values(sku_id),
+      sku_name = values(sku_name),
+      spu_id = values(spu_id),
+      spu_name = values(spu_name),
+      is_deleted = values(is_deleted),
+      ctime = values(ctime),
+      mtime = values(mtime),
+    </trim>
+  </insert>
+  <insert id="insertUpdateSelective" parameterType="com.qiuliang.product.model.pojo.product.PurchaseLogPo">
+    insert into purchase_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="purchaseId != null">
+        purchase_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="skuName != null">
+        sku_name,
+      </if>
+      <if test="spuId != null">
+        spu_id,
+      </if>
+      <if test="spuName != null">
+        spu_name,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseId != null">
+        #{purchaseId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="skuName != null">
+        #{skuName,jdbcType=VARCHAR},
+      </if>
+      <if test="spuId != null">
+        #{spuId,jdbcType=BIGINT},
+      </if>
+      <if test="spuName != null">
+        #{spuName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    <trim prefix="on duplicate key update" suffixOverrides=",">
+      <if test="purchaseId != null">
+        purchase_id = values(purchase_id),
+      </if>
+      <if test="userId != null">
+        user_id = values(user_id),
+      </if>
+      <if test="userName != null">
+        user_name = values(user_name),
+      </if>
+      <if test="skuId != null">
+        sku_id = values(sku_id),
+      </if>
+      <if test="skuName != null">
+        sku_name = values(sku_name),
+      </if>
+      <if test="spuId != null">
+        spu_id = values(spu_id),
+      </if>
+      <if test="spuName != null">
+        spu_name = values(spu_name),
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = values(is_deleted),
+      </if>
+      <if test="ctime != null">
+        ctime = values(ctime),
+      </if>
+      <if test="mtime != null">
+        mtime = values(mtime),
+      </if>
+    </trim>
+  </insert>
+</mapper>

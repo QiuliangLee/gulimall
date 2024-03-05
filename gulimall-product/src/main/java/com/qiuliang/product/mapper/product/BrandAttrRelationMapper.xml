@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiuliang.product.mapper.product.BrandAttrRelationMapper">
+  <resultMap id="BaseResultMap" type="com.qiuliang.product.model.pojo.product.BrandAttrRelationPo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="relation_id" jdbcType="BIGINT" property="relationId" />
+    <result column="attr_id" jdbcType="BIGINT" property="attrId" />
+    <result column="attr_name" jdbcType="VARCHAR" property="attrName" />
+    <result column="group_id" jdbcType="BIGINT" property="groupId" />
+    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+  </resultMap>
+  <resultMap id="AliasBaseResultMap" type="com.qiuliang.product.model.pojo.product.BrandAttrRelationPo">
+    <id column="brand_attr_relation_id" jdbcType="BIGINT" property="id" />
+    <result column="brand_attr_relation_relation_id" jdbcType="BIGINT" property="relationId" />
+    <result column="brand_attr_relation_attr_id" jdbcType="BIGINT" property="attrId" />
+    <result column="brand_attr_relation_attr_name" jdbcType="VARCHAR" property="attrName" />
+    <result column="brand_attr_relation_group_id" jdbcType="BIGINT" property="groupId" />
+    <result column="brand_attr_relation_group_name" jdbcType="VARCHAR" property="groupName" />
+    <result column="brand_attr_relation_is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="brand_attr_relation_ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="brand_attr_relation_mtime" jdbcType="TIMESTAMP" property="mtime" />
+  </resultMap>
+  <sql id="Alias_Base_Column_List">
+    ${alias}.id as brand_attr_relation_id, ${alias}.relation_id as brand_attr_relation_relation_id, 
+    ${alias}.attr_id as brand_attr_relation_attr_id, ${alias}.attr_name as brand_attr_relation_attr_name, 
+    ${alias}.group_id as brand_attr_relation_group_id, ${alias}.group_name as brand_attr_relation_group_name, 
+    ${alias}.is_deleted as brand_attr_relation_is_deleted, ${alias}.ctime as brand_attr_relation_ctime, 
+    ${alias}.mtime as brand_attr_relation_mtime
+  </sql>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, relation_id, attr_id, attr_name, group_id, group_name, is_deleted, ctime, mtime
+  </sql>
+  <select id="selectByExample" parameterType="com.qiuliang.product.model.pojo.product.BrandAttrRelationPoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from brand_attr_relation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from brand_attr_relation
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from brand_attr_relation
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiuliang.product.model.pojo.product.BrandAttrRelationPoExample">
+    delete from brand_attr_relation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiuliang.product.model.pojo.product.BrandAttrRelationPo">
+    insert into brand_attr_relation (id, relation_id, attr_id, 
+      attr_name, group_id, group_name, 
+      is_deleted, ctime, mtime
+      )
+    values (#{id,jdbcType=BIGINT}, #{relationId,jdbcType=BIGINT}, #{attrId,jdbcType=BIGINT}, 
+      #{attrName,jdbcType=VARCHAR}, #{groupId,jdbcType=BIGINT}, #{groupName,jdbcType=VARCHAR}, 
+      #{isDeleted,jdbcType=TINYINT}, #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiuliang.product.model.pojo.product.BrandAttrRelationPo">
+    insert into brand_attr_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="relationId != null">
+        relation_id,
+      </if>
+      <if test="attrId != null">
+        attr_id,
+      </if>
+      <if test="attrName != null">
+        attr_name,
+      </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="groupName != null">
+        group_name,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="relationId != null">
+        #{relationId,jdbcType=BIGINT},
+      </if>
+      <if test="attrId != null">
+        #{attrId,jdbcType=BIGINT},
+      </if>
+      <if test="attrName != null">
+        #{attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiuliang.product.model.pojo.product.BrandAttrRelationPoExample" resultType="java.lang.Long">
+    select count(*) from brand_attr_relation
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update brand_attr_relation
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.relationId != null">
+        relation_id = #{record.relationId,jdbcType=BIGINT},
+      </if>
+      <if test="record.attrId != null">
+        attr_id = #{record.attrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.attrName != null">
+        attr_name = #{record.attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupId != null">
+        group_id = #{record.groupId,jdbcType=BIGINT},
+      </if>
+      <if test="record.groupName != null">
+        group_name = #{record.groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mtime != null">
+        mtime = #{record.mtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update brand_attr_relation
+    set id = #{record.id,jdbcType=BIGINT},
+      relation_id = #{record.relationId,jdbcType=BIGINT},
+      attr_id = #{record.attrId,jdbcType=BIGINT},
+      attr_name = #{record.attrName,jdbcType=VARCHAR},
+      group_id = #{record.groupId,jdbcType=BIGINT},
+      group_name = #{record.groupName,jdbcType=VARCHAR},
+      is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      mtime = #{record.mtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiuliang.product.model.pojo.product.BrandAttrRelationPo">
+    update brand_attr_relation
+    <set>
+      <if test="relationId != null">
+        relation_id = #{relationId,jdbcType=BIGINT},
+      </if>
+      <if test="attrId != null">
+        attr_id = #{attrId,jdbcType=BIGINT},
+      </if>
+      <if test="attrName != null">
+        attr_name = #{attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="groupName != null">
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiuliang.product.model.pojo.product.BrandAttrRelationPo">
+    update brand_attr_relation
+    set relation_id = #{relationId,jdbcType=BIGINT},
+      attr_id = #{attrId,jdbcType=BIGINT},
+      attr_name = #{attrName,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=BIGINT},
+      group_name = #{groupName,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="insertUpdate" parameterType="com.qiuliang.product.model.pojo.product.BrandAttrRelationPo">
+    insert into brand_attr_relation (id, relation_id, attr_id, 
+      attr_name, group_id, group_name, 
+      is_deleted, ctime, mtime
+      )
+    values (#{id,jdbcType=BIGINT}, #{relationId,jdbcType=BIGINT}, #{attrId,jdbcType=BIGINT}, 
+      #{attrName,jdbcType=VARCHAR}, #{groupId,jdbcType=BIGINT}, #{groupName,jdbcType=VARCHAR}, 
+      #{isDeleted,jdbcType=TINYINT}, #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}
+      )
+    <trim prefix="on duplicate key update" suffixOverrides=",">
+      relation_id = values(relation_id),
+      attr_id = values(attr_id),
+      attr_name = values(attr_name),
+      group_id = values(group_id),
+      group_name = values(group_name),
+      is_deleted = values(is_deleted),
+      ctime = values(ctime),
+      mtime = values(mtime),
+    </trim>
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into 
+      brand_attr_relation
+      (relation_id,attr_id,attr_name,group_id,group_name,is_deleted,ctime,mtime)
+    values
+    <foreach collection="list" item="item" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        #{item.relationId,jdbcType=BIGINT},
+        #{item.attrId,jdbcType=BIGINT},
+        #{item.attrName,jdbcType=VARCHAR},
+        #{item.groupId,jdbcType=BIGINT},
+        #{item.groupName,jdbcType=VARCHAR},
+        #{item.isDeleted,jdbcType=TINYINT},
+        #{item.ctime,jdbcType=TIMESTAMP},
+        #{item.mtime,jdbcType=TIMESTAMP},
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="insertUpdateBatch" parameterType="java.util.List">
+    insert into 
+      brand_attr_relation
+      (relation_id,attr_id,attr_name,group_id,group_name,is_deleted,ctime,mtime)
+    values
+    <foreach collection="list" item="item" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        #{item.relationId,jdbcType=BIGINT},
+        #{item.attrId,jdbcType=BIGINT},
+        #{item.attrName,jdbcType=VARCHAR},
+        #{item.groupId,jdbcType=BIGINT},
+        #{item.groupName,jdbcType=VARCHAR},
+        #{item.isDeleted,jdbcType=TINYINT},
+        #{item.ctime,jdbcType=TIMESTAMP},
+        #{item.mtime,jdbcType=TIMESTAMP},
+      </trim>
+    </foreach>
+    <trim prefix="on duplicate key update" suffixOverrides=",">
+      relation_id = values(relation_id),
+      attr_id = values(attr_id),
+      attr_name = values(attr_name),
+      group_id = values(group_id),
+      group_name = values(group_name),
+      is_deleted = values(is_deleted),
+      ctime = values(ctime),
+      mtime = values(mtime),
+    </trim>
+  </insert>
+  <insert id="insertUpdateSelective" parameterType="com.qiuliang.product.model.pojo.product.BrandAttrRelationPo">
+    insert into brand_attr_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="relationId != null">
+        relation_id,
+      </if>
+      <if test="attrId != null">
+        attr_id,
+      </if>
+      <if test="attrName != null">
+        attr_name,
+      </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="groupName != null">
+        group_name,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="relationId != null">
+        #{relationId,jdbcType=BIGINT},
+      </if>
+      <if test="attrId != null">
+        #{attrId,jdbcType=BIGINT},
+      </if>
+      <if test="attrName != null">
+        #{attrName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    <trim prefix="on duplicate key update" suffixOverrides=",">
+      <if test="relationId != null">
+        relation_id = values(relation_id),
+      </if>
+      <if test="attrId != null">
+        attr_id = values(attr_id),
+      </if>
+      <if test="attrName != null">
+        attr_name = values(attr_name),
+      </if>
+      <if test="groupId != null">
+        group_id = values(group_id),
+      </if>
+      <if test="groupName != null">
+        group_name = values(group_name),
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = values(is_deleted),
+      </if>
+      <if test="ctime != null">
+        ctime = values(ctime),
+      </if>
+      <if test="mtime != null">
+        mtime = values(mtime),
+      </if>
+    </trim>
+  </insert>
+</mapper>

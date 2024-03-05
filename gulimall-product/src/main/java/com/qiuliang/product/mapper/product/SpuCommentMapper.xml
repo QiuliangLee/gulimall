@@ -1,0 +1,513 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiuliang.product.mapper.product.SpuCommentMapper">
+  <resultMap id="BaseResultMap" type="com.qiuliang.product.model.pojo.product.SpuCommentPo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="comment_id" jdbcType="BIGINT" property="commentId" />
+    <result column="sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="spu_id" jdbcType="BIGINT" property="spuId" />
+    <result column="show_status" jdbcType="TINYINT" property="showStatus" />
+    <result column="resource" jdbcType="VARCHAR" property="resource" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="comment_type" jdbcType="TINYINT" property="commentType" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="mtime" jdbcType="TIMESTAMP" property="mtime" />
+  </resultMap>
+  <resultMap id="AliasBaseResultMap" type="com.qiuliang.product.model.pojo.product.SpuCommentPo">
+    <id column="spu_comment_id" jdbcType="BIGINT" property="id" />
+    <result column="spu_comment_comment_id" jdbcType="BIGINT" property="commentId" />
+    <result column="spu_comment_sku_id" jdbcType="BIGINT" property="skuId" />
+    <result column="spu_comment_spu_id" jdbcType="BIGINT" property="spuId" />
+    <result column="spu_comment_show_status" jdbcType="TINYINT" property="showStatus" />
+    <result column="spu_comment_resource" jdbcType="VARCHAR" property="resource" />
+    <result column="spu_comment_content" jdbcType="VARCHAR" property="content" />
+    <result column="spu_comment_comment_type" jdbcType="TINYINT" property="commentType" />
+    <result column="spu_comment_is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="spu_comment_ctime" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="spu_comment_mtime" jdbcType="TIMESTAMP" property="mtime" />
+  </resultMap>
+  <sql id="Alias_Base_Column_List">
+    ${alias}.id as spu_comment_id, ${alias}.comment_id as spu_comment_comment_id, ${alias}.sku_id as spu_comment_sku_id, 
+    ${alias}.spu_id as spu_comment_spu_id, ${alias}.show_status as spu_comment_show_status, 
+    ${alias}.resource as spu_comment_resource, ${alias}.content as spu_comment_content, 
+    ${alias}.comment_type as spu_comment_comment_type, ${alias}.is_deleted as spu_comment_is_deleted, 
+    ${alias}.ctime as spu_comment_ctime, ${alias}.mtime as spu_comment_mtime
+  </sql>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, comment_id, sku_id, spu_id, show_status, resource, content, comment_type, is_deleted, 
+    ctime, mtime
+  </sql>
+  <select id="selectByExample" parameterType="com.qiuliang.product.model.pojo.product.SpuCommentPoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from spu_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from spu_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from spu_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qiuliang.product.model.pojo.product.SpuCommentPoExample">
+    delete from spu_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qiuliang.product.model.pojo.product.SpuCommentPo">
+    insert into spu_comment (id, comment_id, sku_id, 
+      spu_id, show_status, resource, 
+      content, comment_type, is_deleted, 
+      ctime, mtime)
+    values (#{id,jdbcType=BIGINT}, #{commentId,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, 
+      #{spuId,jdbcType=BIGINT}, #{showStatus,jdbcType=TINYINT}, #{resource,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{commentType,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiuliang.product.model.pojo.product.SpuCommentPo">
+    insert into spu_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="commentId != null">
+        comment_id,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="spuId != null">
+        spu_id,
+      </if>
+      <if test="showStatus != null">
+        show_status,
+      </if>
+      <if test="resource != null">
+        resource,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="commentType != null">
+        comment_type,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="commentId != null">
+        #{commentId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="spuId != null">
+        #{spuId,jdbcType=BIGINT},
+      </if>
+      <if test="showStatus != null">
+        #{showStatus,jdbcType=TINYINT},
+      </if>
+      <if test="resource != null">
+        #{resource,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="commentType != null">
+        #{commentType,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qiuliang.product.model.pojo.product.SpuCommentPoExample" resultType="java.lang.Long">
+    select count(*) from spu_comment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update spu_comment
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.commentId != null">
+        comment_id = #{record.commentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.skuId != null">
+        sku_id = #{record.skuId,jdbcType=BIGINT},
+      </if>
+      <if test="record.spuId != null">
+        spu_id = #{record.spuId,jdbcType=BIGINT},
+      </if>
+      <if test="record.showStatus != null">
+        show_status = #{record.showStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.resource != null">
+        resource = #{record.resource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentType != null">
+        comment_type = #{record.commentType,jdbcType=TINYINT},
+      </if>
+      <if test="record.isDeleted != null">
+        is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="record.ctime != null">
+        ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.mtime != null">
+        mtime = #{record.mtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update spu_comment
+    set id = #{record.id,jdbcType=BIGINT},
+      comment_id = #{record.commentId,jdbcType=BIGINT},
+      sku_id = #{record.skuId,jdbcType=BIGINT},
+      spu_id = #{record.spuId,jdbcType=BIGINT},
+      show_status = #{record.showStatus,jdbcType=TINYINT},
+      resource = #{record.resource,jdbcType=VARCHAR},
+      content = #{record.content,jdbcType=VARCHAR},
+      comment_type = #{record.commentType,jdbcType=TINYINT},
+      is_deleted = #{record.isDeleted,jdbcType=TINYINT},
+      ctime = #{record.ctime,jdbcType=TIMESTAMP},
+      mtime = #{record.mtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiuliang.product.model.pojo.product.SpuCommentPo">
+    update spu_comment
+    <set>
+      <if test="commentId != null">
+        comment_id = #{commentId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        sku_id = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="spuId != null">
+        spu_id = #{spuId,jdbcType=BIGINT},
+      </if>
+      <if test="showStatus != null">
+        show_status = #{showStatus,jdbcType=TINYINT},
+      </if>
+      <if test="resource != null">
+        resource = #{resource,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="commentType != null">
+        comment_type = #{commentType,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="ctime != null">
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiuliang.product.model.pojo.product.SpuCommentPo">
+    update spu_comment
+    set comment_id = #{commentId,jdbcType=BIGINT},
+      sku_id = #{skuId,jdbcType=BIGINT},
+      spu_id = #{spuId,jdbcType=BIGINT},
+      show_status = #{showStatus,jdbcType=TINYINT},
+      resource = #{resource,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      comment_type = #{commentType,jdbcType=TINYINT},
+      is_deleted = #{isDeleted,jdbcType=TINYINT},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="insertUpdate" parameterType="com.qiuliang.product.model.pojo.product.SpuCommentPo">
+    insert into spu_comment (id, comment_id, sku_id, 
+      spu_id, show_status, resource, 
+      content, comment_type, is_deleted, 
+      ctime, mtime)
+    values (#{id,jdbcType=BIGINT}, #{commentId,jdbcType=BIGINT}, #{skuId,jdbcType=BIGINT}, 
+      #{spuId,jdbcType=BIGINT}, #{showStatus,jdbcType=TINYINT}, #{resource,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{commentType,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP})
+    <trim prefix="on duplicate key update" suffixOverrides=",">
+      comment_id = values(comment_id),
+      sku_id = values(sku_id),
+      spu_id = values(spu_id),
+      show_status = values(show_status),
+      resource = values(resource),
+      content = values(content),
+      comment_type = values(comment_type),
+      is_deleted = values(is_deleted),
+      ctime = values(ctime),
+      mtime = values(mtime),
+    </trim>
+  </insert>
+  <insert id="insertBatch" parameterType="java.util.List">
+    insert into 
+      spu_comment
+      (comment_id,sku_id,spu_id,show_status,resource,content,comment_type,is_deleted,ctime,mtime)
+    values
+    <foreach collection="list" item="item" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        #{item.commentId,jdbcType=BIGINT},
+        #{item.skuId,jdbcType=BIGINT},
+        #{item.spuId,jdbcType=BIGINT},
+        #{item.showStatus,jdbcType=TINYINT},
+        #{item.resource,jdbcType=VARCHAR},
+        #{item.content,jdbcType=VARCHAR},
+        #{item.commentType,jdbcType=TINYINT},
+        #{item.isDeleted,jdbcType=TINYINT},
+        #{item.ctime,jdbcType=TIMESTAMP},
+        #{item.mtime,jdbcType=TIMESTAMP},
+      </trim>
+    </foreach>
+  </insert>
+  <insert id="insertUpdateBatch" parameterType="java.util.List">
+    insert into 
+      spu_comment
+      (comment_id,sku_id,spu_id,show_status,resource,content,comment_type,is_deleted,ctime,mtime)
+    values
+    <foreach collection="list" item="item" separator=",">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        #{item.commentId,jdbcType=BIGINT},
+        #{item.skuId,jdbcType=BIGINT},
+        #{item.spuId,jdbcType=BIGINT},
+        #{item.showStatus,jdbcType=TINYINT},
+        #{item.resource,jdbcType=VARCHAR},
+        #{item.content,jdbcType=VARCHAR},
+        #{item.commentType,jdbcType=TINYINT},
+        #{item.isDeleted,jdbcType=TINYINT},
+        #{item.ctime,jdbcType=TIMESTAMP},
+        #{item.mtime,jdbcType=TIMESTAMP},
+      </trim>
+    </foreach>
+    <trim prefix="on duplicate key update" suffixOverrides=",">
+      comment_id = values(comment_id),
+      sku_id = values(sku_id),
+      spu_id = values(spu_id),
+      show_status = values(show_status),
+      resource = values(resource),
+      content = values(content),
+      comment_type = values(comment_type),
+      is_deleted = values(is_deleted),
+      ctime = values(ctime),
+      mtime = values(mtime),
+    </trim>
+  </insert>
+  <insert id="insertUpdateSelective" parameterType="com.qiuliang.product.model.pojo.product.SpuCommentPo">
+    insert into spu_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="commentId != null">
+        comment_id,
+      </if>
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="spuId != null">
+        spu_id,
+      </if>
+      <if test="showStatus != null">
+        show_status,
+      </if>
+      <if test="resource != null">
+        resource,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="commentType != null">
+        comment_type,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="ctime != null">
+        ctime,
+      </if>
+      <if test="mtime != null">
+        mtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="commentId != null">
+        #{commentId,jdbcType=BIGINT},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="spuId != null">
+        #{spuId,jdbcType=BIGINT},
+      </if>
+      <if test="showStatus != null">
+        #{showStatus,jdbcType=TINYINT},
+      </if>
+      <if test="resource != null">
+        #{resource,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="commentType != null">
+        #{commentType,jdbcType=TINYINT},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+    <trim prefix="on duplicate key update" suffixOverrides=",">
+      <if test="commentId != null">
+        comment_id = values(comment_id),
+      </if>
+      <if test="skuId != null">
+        sku_id = values(sku_id),
+      </if>
+      <if test="spuId != null">
+        spu_id = values(spu_id),
+      </if>
+      <if test="showStatus != null">
+        show_status = values(show_status),
+      </if>
+      <if test="resource != null">
+        resource = values(resource),
+      </if>
+      <if test="content != null">
+        content = values(content),
+      </if>
+      <if test="commentType != null">
+        comment_type = values(comment_type),
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = values(is_deleted),
+      </if>
+      <if test="ctime != null">
+        ctime = values(ctime),
+      </if>
+      <if test="mtime != null">
+        mtime = values(mtime),
+      </if>
+    </trim>
+  </insert>
+</mapper>
